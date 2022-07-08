@@ -88,6 +88,37 @@ paths:
         404:
           $ref: "#/components/responses/NotFound"
 
+  /api/camera:
+    post:
+      summary: Capture an image from a camera and return it
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                resolution:
+                  type: object
+                  properties:
+                    width:
+                      type: integer
+                      default: 640
+                    height:
+                      type: integer
+                      default: 640
+      responses:
+        200:
+          description: OK
+          content:
+            image/png:
+              schema:
+                type: string
+                format: binary
+        401:
+          $ref: "#/components/responses/Unauthorized"
+        409:
+          $ref: "#/components/responses/Conflict"
+
 components:
   schemas:
     Version:
